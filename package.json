@@ -1,0 +1,24 @@
+{
+  "name": "create-next-example-app",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "express": "^4.16.3",
+    "materialize-css": "^1.0.0-rc.2",
+    "moment": "^2.22.2",
+    "next": "^6.1.1",
+    "next-redux-wrapper": "^2.0.0-beta.6",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-observable": "^1.0.0",
+    "redux-thunk": "^2.3.0",
+    "rxjs": "^6.2.1"
+  }
+}
