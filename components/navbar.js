@@ -2,6 +2,7 @@ import {Fragment} from 'react';
 import Link from 'next/link';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 
 const Navbar = (props)=>{
@@ -12,7 +13,7 @@ const Navbar = (props)=>{
         let buttonClassNames = classNames({
             'btn' : true,
             'btn-link' : true,
-            'active' : props.currentFeed === type,
+            'active' : props.currentFeed == type,
         });
 
         let linkText = type.charAt(0).toUpperCase() + type.slice(1);
@@ -127,7 +128,11 @@ const Navbar = (props)=>{
     </div>
     );
 
-}; 
+};
+
+Navbar.propTypes = {
+    currentFeed: PropTypes.bool
+};
 
 const mapStateToProps = state => {
   return { 

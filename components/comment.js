@@ -1,6 +1,7 @@
 import {Fragment} from 'react';
 import Link from 'next/link';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 const Comment = (props) => {
 
@@ -60,4 +61,9 @@ const Comment = (props) => {
       </Fragment>
     );
 };
+
+Comment.propTypes = {
+   comment: PropTypes.object
+};
+
 export default Comment;

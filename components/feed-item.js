@@ -1,5 +1,7 @@
 import React,{Component,Fragment} from 'react';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
+
 const FeedItem = (props)=>{
 
     return (
@@ -115,5 +117,9 @@ const FeedItem = (props)=>{
         </Fragment> 
     );
 
+};
+
+FeedItem.propTypes = {
+    feed: PropTypes.object
 };
 export default FeedItem;

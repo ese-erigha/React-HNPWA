@@ -2,6 +2,7 @@ import React,{Component,Fragment} from 'react';
 import {withRouter} from 'next/router';
 import {connect} from 'react-redux';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
 import * as feedActions from '../redux/actions/feed.actions';
 import Comment from './comment';
 
@@ -10,7 +11,7 @@ class Story extends Component{
 
     componentDidMount(){
         let params = {id: this.props.router.query.id};
-        // console.log("server side navigation in feed list component")
+        //console.log("server side navigation in feed list component")
         this.props.fetchStory(params); //used for server side rendering i.e when browser is refreshed or url is typed in browser
     }
 
@@ -102,6 +103,11 @@ class Story extends Component{
     }
 
 
+};
+
+Story.propTypes = {
+    item: PropTypes.object,
+    loading: PropTypes.bool
 };
 
 

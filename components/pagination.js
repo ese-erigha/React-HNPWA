@@ -2,6 +2,7 @@ import React,{Component,Fragment} from 'react';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import * as feedActions from '../redux/actions/feed.actions';
+import PropTypes from 'prop-types';
 
 class Pagination extends Component {
 
@@ -115,6 +116,12 @@ class Pagination extends Component {
         );
 
     }
+};
+
+Pagination.propTypes = {
+    loading: PropTypes.bool,
+    currentFeed: PropTypes.string,
+    feed: PropTypes.object
 };
 
 

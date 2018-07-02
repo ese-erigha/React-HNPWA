@@ -1,18 +1,18 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
-import * as feedActions from '../redux/actions/feed.actions';
+import * as userActions from '../redux/actions/user.actions';
 import PropTypes from 'prop-types';
 import Layout from '../components/layout';
 import Spinner from '../components/spinner';
-import Story from '../components/story';
+import Person from '../components/person';
 
 
-class Feed extends Component {
+class User extends Component {
 
     static  getInitialProps({store, isServer, pathname, query}) {
 
         // console.log("client side navigation in feeds component");
-        store.dispatch(feedActions.loadItemAction({id: query.id})); //used for client side navigation with Link function in next.js
+        store.dispatch(userActions.loadUserAction({id: query.id})); //used for client side navigation with Link function in next.js
 
         return {}; 
     }
@@ -21,21 +21,21 @@ class Feed extends Component {
         return (
 
             <Layout>
-            {this.props.loading && <Spinner/>}
-              <Story/>
+              {this.props.loading && <Spinner/>}
+              <Person/>
             </Layout>  
         );
     }
 };
 
-Feed.propTypes = {
+User.propTypes = {
     loading: PropTypes.bool
 };
 
 const mapStateToProps = state => {
  
   return { 
-      loading: state.feedState.loading
+      loading: state.userState.loading
   };
 };
 
@@ -45,4 +45,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Feed);
+export default connect(mapStateToProps,mapDispatchToProps)(User);

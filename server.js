@@ -3,7 +3,7 @@ const next = require('next')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
-const handle = app.getRequestHandler()
+const handle = app.getRequestHandler();
 
 app.prepare()
 .then(() => {
@@ -19,6 +19,12 @@ app.prepare()
   server.get('/feeds/:type', (req, res) => {
     const actualPage = '/feeds'
     const queryParams = { type: req.params.type } 
+    app.render(req, res, actualPage, queryParams)
+  });
+
+  server.get('/user/:id', (req, res) => {
+    const actualPage = '/user'
+    const queryParams = { type: req.params.id } 
     app.render(req, res, actualPage, queryParams)
   });
 

@@ -3,13 +3,14 @@ import {withRouter} from 'next/router';
 import {connect} from 'react-redux';
 import * as feedActions from '../redux/actions/feed.actions';
 import FeedItem from './feed-item';
+import PropTypes from 'prop-types';
 
 
 class FeedList extends Component {
 
     componentDidMount(){
         let params = {type: this.props.router.query.type,pageNumber: 1};
-        // console.log("server side navigation in feed list component")
+        console.log("server side navigation in feed list component")
         this.props.fetchFeeds(params); //used for server side rendering i.e when browser is refreshed or url is typed in browser
     }
 
@@ -27,6 +28,13 @@ class FeedList extends Component {
              
         );
     }
+};
+
+
+FeedList.propType = {
+    currentFeed: PropTypes.string,
+    feeds: PropTypes.array,
+    loading: PropTypes.bool
 };
 
 const mapStateToProps = state => {

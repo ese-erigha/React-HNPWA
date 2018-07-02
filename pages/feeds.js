@@ -1,18 +1,19 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import * as feedActions from '../redux/actions/feed.actions';
-
+import PropTypes from 'prop-types';
 import Layout from '../components/layout';
 import FeedList from '../components/feed-list';
 import Pagination from '../components/pagination';
 import Spinner from '../components/spinner';
 
 
+
 class Feeds extends Component {
 
     static  getInitialProps({store, isServer, pathname, query}) {
 
-        // console.log("client side naigation in feeds component");
+        console.log("client side naigation in feeds component");
         store.dispatch(feedActions.loadFeedsAction({type: query.type,pageNumber:1})); //used for client side navigation with Link function in next.js
 
         return {}; 
@@ -28,6 +29,10 @@ class Feeds extends Component {
             </Layout>  
         );
     }
+};
+
+Feeds.propTypes = {
+    loading: PropTypes.bool
 };
 
 const mapStateToProps = state => {
