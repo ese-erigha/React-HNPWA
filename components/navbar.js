@@ -131,7 +131,7 @@ const Navbar = (props)=>{
 };
 
 Navbar.propTypes = {
-    currentFeed: PropTypes.bool
+    currentFeed: PropTypes.string
 };
 
 const mapStateToProps = state => {

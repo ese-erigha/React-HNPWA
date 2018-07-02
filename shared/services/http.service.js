@@ -1,5 +1,7 @@
 import * as axios from 'axios';
 import errorService from './error.service';
+import notificationService from './notification.service';
+const isOnline = require('is-online');
 
 let httpService = {
 
@@ -40,7 +42,7 @@ let httpService = {
     },
     intercept: ({
         options,
-        retry = 2,
+        retry = 3,
         delay = 200
     }) => {
 
@@ -76,25 +78,14 @@ let httpService = {
                     //console.log(error.response.status);
 
                     if (error.response.status === 401) {
-                        err = handleError(error.response.status);
-                        reject(new Error(errorService.createFromJSON(err)));
+
+                        //Handle Authentication issues
+                        //Please reject errors with reject(....)
 
                     } else if (error.response.status === 400) {
 
-                        let errorObject = {};
-
-                        if (error.response.data) {
-
-                            errorObject = {
-                                type: "validation",
-                                message: error.response.data,
-                                status: error.response.status
-                            };
-
-                        } else {
-                            errorObject = handleError(error.response.status);
-                        }
-                        reject(new Error(errorService.createFromJSON(errorObject)));
+                        //Handle Bad Request Error such as validation errors
+                        //Please reject errors with reject(....)
 
                     } else {
 
@@ -107,11 +98,24 @@ let httpService = {
                                     retry: retry
                                 })
                             }, delay);
+
                         } else {
 
-                            //reject error  when retry attempts has been exhausted
-                            err = handleError(error.response.status);
-                            reject(new Error(errorService.createFromJSON(err)));
+                            isOnline().then((isInternetEnabled) => {
+
+                                if (!isInternetEnabled) {
+
+                                    notificationService.dispatchError(getErrorMessage(900));
+
+                                } else {
+
+                                    // Handle Http Error (error.status === 403, 404...)
+                                    notificationService.dispatchError(getErrorMessage(error.response.status));
+                                }
+
+                                reject(new Error(errorService.createFromJSON(getErrorMessage(error.response.status))));
+                            });
+  
                         }
                     }
 
@@ -119,32 +123,55 @@ let httpService = {
                     // The request was made but no response was received
                     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
                     // http.ClientRequest in node.js
-                    err = handleError(408);
-                    reject(new Error(errorService.createFromJSON(err)));
+                    isOnline().then((isInternetEnabled) => {
+
+                        if (!isInternetEnabled) {
+
+                            notificationService.dispatchError(getErrorMessage(900));
+                            reject(new Error(errorService.createFromJSON(getErrorMessage(900))));
+                        } else {
+
+                            // Handle Http Error (error.status === 403, 404...)
+                            notificationService.dispatchError(getErrorMessage(408));
+                            reject(new Error(errorService.createFromJSON(getErrorMessage(408))));
+                        }
+
+                        
+                    });
+                    
 
                 } else {
+
                     // Something happened in setting up the request that triggered an Error
-                    err = handleError(700);
-                    reject(new Error(errorService.createFromJSON(err)));
+                    notificationService.dispatchError(getErrorMessage(700));
+                    reject(new Error(errorService.createFromJSON(getErrorMessage(700))));
                 }
             };
 
-            function handleError(statusCode) {
+            function getErrorMessage(statusCode) {
 
                 let responseStates = {
-                    404: 'API endpoint does not exist',
-                    400: 'Invalid username and password',
-                    401: 'Token has expired',
-                    408: 'The request timed out',
-                    500: 'A server error occurred while fetching data',
-                    700: 'An unknown error has occurred'
+                    0: "Please check your internet connection",
+                    404: "Endpoint does not exist",
+                    400: "Bad request from server",
+                    401: "Token has expired",
+                    403: "You do not have the permission to access this resource",
+                    408: "The request timed out",
+                    500: "A server error occurred while fetching data",
+                    700: "An unknown error has occurred",
+                    900: "Please check your internet connection"
                 };
 
-                return {
-                    status: statusCode,
-                    message: responseStates[statusCode],
-                    type: "generic"
+                let message = {
+
+                    statusCode: statusCode,
+                    title: 'Oops',
+                    text: responseStates[statusCode] || responseStates[700],
+                    type: 'error'
+
                 };
+
+                return message;
             };
 
             request(options);

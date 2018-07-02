@@ -6,10 +6,20 @@ import Layout from '../components/layout';
 import FeedList from '../components/feed-list';
 import Pagination from '../components/pagination';
 import Spinner from '../components/spinner';
+import notificationService from '../shared/services/notification.service';
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+import swal from 'sweetalert2';
 
 
 
 class Feeds extends Component {
+
+    constructor(props){
+        super(props);
+
+        this.destroy$ = new Subject();
+    }
 
     static  getInitialProps({store, isServer, pathname, query}) {
 
@@ -17,6 +27,23 @@ class Feeds extends Component {
         store.dispatch(feedActions.loadFeedsAction({type: query.type,pageNumber:1})); //used for client side navigation with Link function in next.js
 
         return {}; 
+    }
+
+    componentWillMount(){
+
+        notificationService.dispatchError$
+                           .pipe(takeUntil(this.destroy$))
+                            .subscribe((error)=>{
+                                
+                                swal({
+                                  title: error.title,
+                                  text: error.text,
+                                  type: 'error',
+                                  toast: false,
+                                  allowOutsideClick: false,
+                                  allowEscapeKey: false
+                                });
+                            });
     }
 
     render() {
@@ -28,6 +55,13 @@ class Feeds extends Component {
               <FeedList/>
             </Layout>  
         );
+    }
+
+    componentWillUnmount(){
+
+        this.destroy$.next(true);
+        // Now let's also unsubscribe from the subject itself:
+        this.destroy$.unsubscribe();
     }
 };
 

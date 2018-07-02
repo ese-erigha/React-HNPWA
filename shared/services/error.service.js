@@ -5,7 +5,7 @@ let errorService = {
     },
 
     getErrorCode: (obj) => {
-        return obj['status'];
+        return obj['statusCode'];
     },
 
     parseToJSON: (err) => {

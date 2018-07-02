@@ -27,7 +27,9 @@ const Head = (props) => (
     <link rel="preload" href="https://fonts.googleapis.com/icon?family=Material+Icons" as="style"  onLoad="this.onload=null;this.rel='stylesheet'"/>
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css" as="style"  onLoad="this.onload=null;this.rel='stylesheet'"/>
     <link rel="preload" href="/static/base.css" as="style"  onLoad="this.onload=null;this.rel='stylesheet'"/>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.24.4/dist/sweetalert2.min.css" as="style"  onLoad="this.onload=null;this.rel='stylesheet'"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.24.4/dist/sweetalert2.all.min.js" async></script>
   </NextHead>
 )
 
