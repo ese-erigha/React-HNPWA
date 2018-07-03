@@ -13,6 +13,7 @@ const feedReducer = (state = feedState, action) => {
             return {...state, loading: true, ...action.payload};
 
         case feedActions.LOAD_FEEDS_SUCCESS:
+            //console.log(action.payload);
             return {...state, loading: false, ...action.payload};
 
         case feedActions.LOAD_FEEDS_ERROR:

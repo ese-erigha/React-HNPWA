@@ -36,7 +36,7 @@ const Navbar = (props)=>{
     <nav className="nav-center" role="navigation">
       <div className="nav-wrapper">
         <a href="/" className="brand-logo">
-            <img className="logo" alt="logo" src="/static/android-chrome-512x512.png"/>
+            <img className="logo" alt="logo" src="/static/img/android-chrome-512x512.png"/>
         </a>
         <ul>
           { links}

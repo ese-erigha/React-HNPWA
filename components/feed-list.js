@@ -9,9 +9,9 @@ import PropTypes from 'prop-types';
 class FeedList extends Component {
 
     componentDidMount(){
-        let params = {type: this.props.router.query.type,pageNumber: 1};
-        console.log("server side navigation in feed list component")
-        this.props.fetchFeeds(params); //used for server side rendering i.e when browser is refreshed or url is typed in browser
+        // let params = {type: this.props.router.query.type,pageNumber: 1};
+        // console.log("server side navigation in feed list component")
+        // this.props.fetchFeeds(params); //used for server side rendering i.e when browser is refreshed or url is typed in browser
     }
 
     render() {
@@ -38,7 +38,7 @@ FeedList.propType = {
 };
 
 const mapStateToProps = state => {
-    
+   console.log(state.feedState);
   return { 
       currentFeed: state.feedState.currentFeed,
       feeds: state.feedState.feeds,

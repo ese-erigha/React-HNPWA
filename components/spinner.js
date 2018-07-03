@@ -9,6 +9,7 @@ const Spinner = (props)=>{
                 .progress{
                     background-color: #5755d9;
                     height: 2px;
+                    margin-top: 5px;
                 }
             
                 .progress .indeterminate{

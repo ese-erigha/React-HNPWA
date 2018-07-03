@@ -1,11 +1,26 @@
-import Link from 'next/link'
-import Head from '../components/head'
-import Nav from '../components/nav';
+import {Fragment} from 'react';
+import Router from 'next/router'
 
-import Layout from '../components/layout';
+const Index = () => {
+  
+  return (
 
-export default () => (
-  <Layout>
-      <p>Hello Next.js</p>
-  </Layout>
-);
+        <Fragment>
+        </Fragment>
+  )
+}
+
+Index.getInitialProps = async function({store, isServer, pathname,req, res, query}) {
+  
+  if (req) {
+    console.log('server side')
+    res.writeHead(301, {Location: `/feeds/top`});
+    res.end();
+  } else {
+    console.log('client side')
+    Router.push(`/feeds/top`);
+  }
+}
+
+
+export default Index;

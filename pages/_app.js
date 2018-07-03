@@ -4,6 +4,7 @@ import App, {Container} from "next/app";
 import withRedux from "next-redux-wrapper";
 import initializeStore from '../redux/index';
 
+
 class MyApp extends App {
 
     static async getInitialProps({Component, ctx}) {
@@ -29,4 +30,4 @@ class MyApp extends App {
 
 }
 
-export default withRedux(initializeStore)(MyApp);
+export default withRedux(initializeStore,null)(MyApp);

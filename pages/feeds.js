@@ -10,7 +10,8 @@ import notificationService from '../shared/services/notification.service';
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import swal from 'sweetalert2';
-
+import withRedux from "next-redux-wrapper";
+import initializeStore from '../redux/index';
 
 
 class Feeds extends Component {
@@ -21,11 +22,10 @@ class Feeds extends Component {
         this.destroy$ = new Subject();
     }
 
-    static  getInitialProps({store, isServer, pathname, query}) {
+    static async  getInitialProps({store, isServer, pathname,req, res, query}) {
 
-        console.log("client side naigation in feeds component");
+        console.log("client side navigation in feeds component");
         store.dispatch(feedActions.loadFeedsAction({type: query.type,pageNumber:1})); //used for client side navigation with Link function in next.js
-
         return {}; 
     }
 
@@ -70,10 +70,10 @@ Feeds.propTypes = {
 };
 
 const mapStateToProps = state => {
- 
-  return { 
+   console.log(state.feedState.loading);
+    return { 
       loading: state.feedState.loading
-  };
+    };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -82,4 +82,5 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+//export default withRedux(initializeStore,mapStateToProps,mapDispatchToProps)(Feeds);
 export default connect(mapStateToProps,mapDispatchToProps)(Feeds);

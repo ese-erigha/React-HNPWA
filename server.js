@@ -14,7 +14,11 @@ app.prepare()
     res.redirect(targetUrl);
   }
 
-  server.get('/', handleRedirect);
+  server.get('/sw.js', (req,res)=>{
+    app.serveStatic(req, res, path.resolve('./static/sw.js'));
+  });
+
+  //server.get('/', handleRedirect);
 
   server.get('/feeds/:type', (req, res) => {
     const actualPage = '/feeds'

@@ -1,5 +1,5 @@
 let feedState = {
-    loading: true,
+    loading: false,
     new: {},
     top: {},
     best: {},
