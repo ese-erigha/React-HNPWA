@@ -39,79 +39,23 @@ class Pagination extends Component {
 
             <Fragment>
             {
-                !this.props.loading && Object.keys(this.props.feed).length &&
+                !this.props.loading && this.props.feed && Object.keys(this.props.feed).length &&
                 <div className="pager">
-                    <a onClick={this.fetchPage.bind(this,this.props.feed.pageNumber - 1)} className={prevButtonClassNames}>
-                        <i className="material-icons left">arrow_back</i>Prev
-                    </a>
-                    <span className="pages"> {this.props.feed.pageNumber} OF {this.props.feed.totalPages}</span>
-                    <a onClick={this.fetchPage.bind(this,this.props.feed.pageNumber + 1)} className={nextButtonClassNames}>
-                        <i className="material-icons right">arrow_forward</i>Next
-                    </a>
+                    <div>
+                        <a onClick={this.fetchPage.bind(this,this.props.feed.pageNumber - 1)} className={prevButtonClassNames}>
+                            <i className="material-icons left">arrow_back</i>Prev
+                        </a>
+                    </div>
+                    <div>
+                        <span className="pages"> {this.props.feed.pageNumber} OF {this.props.feed.totalPages}</span>
+                    </div>
+                    <div>
+                        <a onClick={this.fetchPage.bind(this,this.props.feed.pageNumber + 1)} className={nextButtonClassNames}>
+                            <i className="material-icons right">arrow_forward</i>Next
+                        </a>
+                    </div> 
                 </div>
             }
-            <style jsx>{`
-
-            .pager{
-                position: sticky;
-                top: 50px;
-                padding-top: 10px;
-                padding-bottom: 10px;
-                box-shadow: none!important;
-                display: flex;
-                -webkit-box-align: center;
-                -ms-flex-align: center;
-                align-items: center;
-                -webkit-box-pack: center;
-                -ms-flex-pack: center;
-                justify-content: center;
-                background: #f8f9fa;
-                min-height: 6em;
-                border-radius: 10px;
-            }
-            
-            .btn{
-                border: .05rem solid #5755d9;
-                border-radius: 5rem;
-                color: #5755d9;
-                background-color: #fff;
-                box-shadow: none!important;
-                font-size: 1rem;
-            }
-
-            .btn:hover{
-                background-color: #fff; 
-            }
-            .btn[disabled], .btn:disabled, .btn.disabled {
-                cursor: default;
-                opacity: .5;
-                pointer-events: none;
-                background-color: #fff;
-            }
-            
-            .btn.disabled{
-                cursor: default;
-                opacity: .5;
-                pointer-events: none;
-                background-color: #fff;
-            }
-            
-            .pages{
-                text-transform: uppercase;
-                font-weight: 700;
-                padding: 0 2em;
-                color: #acb3c2;
-            }
-            
-            @media only screen and (max-width: 892px) {
-                
-                .btn{
-                    padding: 0px 12px!important;
-                    font-size: 12px!important;
-                }
-            }
-            
-            `}</style>
             </Fragment>
         );
 

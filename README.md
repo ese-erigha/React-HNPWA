@@ -1,2 +1,2 @@
-# React-HNPWA
-Hacker News Progressive Web Application with Redux using React, Next.js and Redux-Observable
+# next-pwa
+Next.js PWA

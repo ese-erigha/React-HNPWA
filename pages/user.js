@@ -1,14 +1,15 @@
 import React,{Component} from 'react';
+import {withRouter} from 'next/router';
 import {connect} from 'react-redux';
 import * as userActions from '../redux/actions/user.actions';
 import PropTypes from 'prop-types';
 import Layout from '../components/layout';
 import Spinner from '../components/spinner';
-import Person from '../components/person';
 import notificationService from '../shared/services/notification.service';
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import swal from 'sweetalert2';
+import moment from 'moment';
 
 
 class User extends Component {
@@ -17,14 +18,6 @@ class User extends Component {
     constructor(props){
         super(props);
         this.destroy$ = new Subject();
-    }
-
-    static  getInitialProps({store, isServer, pathname, query}) {
-
-        // console.log("client side navigation in feeds component");
-        store.dispatch(userActions.loadUserAction({id: query.id})); //used for client side navigation with Link function in next.js
-
-        return {}; 
     }
 
     componentWillMount(){
@@ -44,12 +37,40 @@ class User extends Component {
                             });
     }
 
+    componentDidMount(){
+        let params = {id: this.props.router.query.id};
+        this.props.fetchUser(params); 
+    }
+
     render() {
         return (
 
             <Layout>
               {this.props.loading && <Spinner/>}
-              <Person/>
+              {
+                !this.props.loading && this.props.user &&
+                <div className="user">
+                    <h2> { this.props.user.id }</h2>
+                    <ul>
+                        {this.props.user.created && <li>Joined -  { moment(this.props.user.created * 1000).format("M/DD/YY, h:mm a")}</li> }
+                        {this.props.user.karma && <li>Karma <span className="badge" data-badge={this.props.user.karma || 0}></span></li> }
+                    </ul>
+
+                </div> 
+            }
+            <style jsx>{`
+    
+            .user {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                background: #f8f9fa;
+                min-height: 5em;
+                padding: 3em;
+            }
+            
+            `}</style>
             </Layout>  
         );
     }
@@ -63,20 +84,23 @@ class User extends Component {
 };
 
 User.propTypes = {
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    user: PropTypes.object
 };
 
 const mapStateToProps = state => {
- 
-  return { 
-      loading: state.userState.loading
-  };
+    
+    return { 
+        user: state.userState.user,
+        loading: state.userState.loading
+    };
 };
-
+  
+  
 const mapDispatchToProps = dispatch => {
-  return {
-      
-  };
+    return {
+          fetchUser: (payload) => dispatch(userActions.loadUserAction(payload)),
+    };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(User);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(User));

@@ -1,33 +1,32 @@
-import React from "react";
+import React from 'react';
+import App, { Container } from 'next/app';
 import {Provider} from "react-redux";
-import App, {Container} from "next/app";
 import withRedux from "next-redux-wrapper";
 import initializeStore from '../redux/index';
+import OfflineSupport from '../components/OfflineSupport';
 
+class CustomApp extends App {
 
-class MyApp extends App {
+  static async getInitialProps({Component, ctx}) {
 
-    static async getInitialProps({Component, ctx}) {
+    // we can dispatch from here too
+    //ctx.store.dispatch({type: 'FOO', payload: 'foo'});
+    const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
 
-        // we can dispatch from here too
-        //ctx.store.dispatch({type: 'FOO', payload: 'foo'});
-        const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
+    return {pageProps};
 
-        return {pageProps};
-
-    }
-
-    render() {
-        const {Component, pageProps, store} = this.props;
-        return (
-            <Container>
-                <Provider store={store}>
-                    <Component {...pageProps} />
-                </Provider>
-            </Container>
-        );
-    }
-
+  }
+  render() {
+    const { Component, pageProps, store } = this.props;
+    return (
+      <Container>
+        <OfflineSupport />
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
+      </Container>
+    );
+  }
 }
 
-export default withRedux(initializeStore,null)(MyApp);
+export default withRedux(initializeStore,null)(CustomApp);

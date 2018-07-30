@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import {Fragment} from 'react';
 import Router from 'next/router'
 
