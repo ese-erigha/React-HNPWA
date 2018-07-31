@@ -67,7 +67,7 @@ class Feed extends Component {
                         <p>
                             { this.props.item.score } points by
                             <Link as={`/user/${this.props.item.by}`} href={`/user?id=${this.props.item.by}`}>
-                                <a class="user">  { this.props.item.by }  </a>
+                                <a className="user">  { this.props.item.by }  </a>
                             </Link>
                             | { this.props.item.kids.length || 0 } comments
                         </p>
