@@ -67,7 +67,7 @@ class Feed extends Component {
                         <p>
                             { this.props.item.score } points by
                             <Link as={`/user/${this.props.item.by}`} href={`/user?id=${this.props.item.by}`}>
-                                <a>  { this.props.item.by }  </a>
+                                <a class="user">  { this.props.item.by }  </a>
                             </Link>
                             | { this.props.item.kids.length || 0 } comments
                         </p>
@@ -82,53 +82,6 @@ class Feed extends Component {
                     
                 </div>
             }
-            <style jsx>{`
-    
-            .item {
-                margin-top: -1em;
-            }
-            
-            
-            .item .header{
-                padding: 5px 25px;
-                position: sticky;
-                top: 56px;
-                z-index: 1234567;
-            }
-            
-            .item .header h3{
-                color: #50596c;
-            }
-            
-            .item .card{
-                width: 100%;
-                margin: 0px 0px;
-                box-shadow: none;
-                background: #f8f9fa;
-            }
-            
-            .item .card p a{
-                color: #5755d9;
-            }
-            
-            .comment-wrapper{
-                margin-top: 5px;
-            }
-            
-            
-            @media only screen and (max-width: 892px) {
-            
-                .item .header h3{
-                    font-size: 1.7rem;
-                }
-            
-                .comment-wrapper{
-                    margin-top: 15px;
-                }
-                
-            }
-            
-            `}</style>
             </Layout>  
         );
     }

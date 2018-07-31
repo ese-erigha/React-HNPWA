@@ -1,0 +1,77 @@
+.item {
+    margin-top: 0px;
+
+    .header{
+        padding: 5px 25px;
+        position: sticky;
+        top: 56px;
+        z-index: 1234567;
+
+        h3{
+            color: #50596c;
+
+            @media only screen and (max-width: 892px) {
+
+                font-size: 1.7rem;
+            }
+        }
+    }
+
+    .card{
+        width: 100%;
+        margin: 0px 0px;
+        box-shadow: none;
+        background: #f8f9fa;
+
+        p a{
+            color: #5755d9;
+        }
+    }
+
+    .user{
+        color: $link-color;
+    }
+}
+
+.comment-wrapper{
+
+    margin-top: 5px;
+
+    @media only screen and (max-width: 892px) {
+
+        margin-top: 15px;
+    }
+
+    .comment { 
+        position: relative; 
+        padding-left: 2em;
+        padding-right: 2em;
+        border-top: 1px solid lightgrey;
+
+        .tile {
+            padding: 1em 0 2em;
+            padding-bottom: 0px;
+            padding-top: 0px;
+
+            .tile-content{
+
+                .tile-subtitle{
+
+                    text-align: justify;
+                    font-family: 'Open Sans', sans-serif;
+                    color: gray;
+                    a{
+                        color: #5755d9!important;
+                    }
+                }
+
+            }
+
+            .user{
+                color: $link-color;
+            }
+        }
+    }
+}
+
+

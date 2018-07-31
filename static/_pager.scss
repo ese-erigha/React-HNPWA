@@ -25,15 +25,16 @@
 
 
     .btn{
-        border: .05rem solid #5755d9;
+        border: .05rem solid $link-color;
         border-radius: 5rem;
-        color: #5755d9;
+        color: $link-color;
         background-color: #fff;
         box-shadow: none!important;
-        font-size: 1rem;
+        font-size: 0.9rem;
 
         &:hover{
-            background-color: #fff; 
+            background-color: $link-color;
+            color: #fff!important; 
         }
 
         &[disabled], &:disabled, &.disabled {
@@ -54,7 +55,7 @@
         text-transform: uppercase;
         font-weight: 700;
         padding: 0 2em;
-        color: #acb3c2;
+        color: #000;
     }
     
 }

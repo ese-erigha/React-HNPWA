@@ -82,7 +82,7 @@ Feeds.propTypes = {
 };
 
 const mapStateToProps = state => {
-    console.log(state.feedState.feeds);
+    
     return { 
       loading: state.feedState.loading,
       currentFeed: state.feedState.currentFeed,

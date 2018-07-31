@@ -1,7 +1,7 @@
 .navbar-fixed {
     text-align: center;
     nav {
-        background-color: $background-color;
+        background-color: #000;
         box-shadow: none !important;
         &.nav-center {
             .nav-wrapper {
@@ -26,21 +26,22 @@
                         line-height: 40px;
                         &.btn-link {
                             font-size: 1.2rem;
-                            color: #f60;
+                            color: gray;
                             text-transform: uppercase;
                             background: transparent;
                             border-color: transparent;
                             box-shadow: none !important;
+                            border-radius: 0px;
+                            margin-left: 3px;
+                            margin-right: 3px;
+                            
                             &.active {
-                                color: #5755d9;
-                                text-align: center;
-                                text-decoration: none;
+                                color: #fff;
+                                border-bottom: 2px solid $link-color; 
                             }
                         }
                         &.btn-link:hover {
-                            background: transparent;
-                            border-color: transparent;
-                            color: #5755d9;
+                            color: #fff;
                         }
                     }
                 }

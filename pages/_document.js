@@ -15,6 +15,7 @@ export default class CustomDocument extends Document {
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css"/>
           <link rel="stylesheet" href="/_next/static/style.css" />
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.24.4/dist/sweetalert2.min.css"/>
+          <link href="https://fonts.googleapis.com/css?family=Alegreya|Open+Sans" rel="stylesheet"/>
           <title>Hacker News PWA</title>
         </Head>
         <body>

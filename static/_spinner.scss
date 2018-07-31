@@ -1,0 +1,10 @@
+.progress{
+
+    background-color: $link-color;
+    height: 4px;
+    margin-top: 0px;
+
+    .indeterminate{
+        background-color: #fff;
+    }
+}

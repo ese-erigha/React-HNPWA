@@ -47,7 +47,7 @@ class Pagination extends Component {
                         </a>
                     </div>
                     <div>
-                        <span className="pages"> {this.props.feed.pageNumber} OF {this.props.feed.totalPages}</span>
+                        <span className="pages"> {this.props.feed.pageNumber} / {this.props.feed.totalPages}</span>
                     </div>
                     <div>
                         <a onClick={this.fetchPage.bind(this,this.props.feed.pageNumber + 1)} className={nextButtonClassNames}>

@@ -6,16 +6,12 @@ import moment from 'moment';
 const FeedItem = (props)=>{
 
     return (
-
-        <article className="article">
-
-            {props.feed.url &&
+        <Fragment>
+        { props.feed && props.feed.url && <article className="article">
                 <div className="title">
                     <a href={props.feed.url} target="_blank" rel="noopener" className="main-link hand"> { props.feed.title }</a>
                 </div>
-            }
-
-            {props.feed.url &&
+            
                 <div className="metadata">
                     { props.feed.time && <span>{moment(new Date(props.feed.time)).fromNow() }</span>}
                     {props.feed.by && <span> by
@@ -37,8 +33,9 @@ const FeedItem = (props)=>{
                         </Link>
                     }
                 </div>
-            }
-        </article> 
+        </article>
+       }
+       </Fragment> 
     );
 
 };

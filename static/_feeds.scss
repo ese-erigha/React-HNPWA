@@ -8,9 +8,10 @@
 
             .main-link {
                 display: block;
-                font-size: 1.6em;
+                font-size: 1.5em;
                 margin: 1em 0;
-                color: #727e96;
+                color: #000;
+                color: gray;
             }
 
         }
@@ -18,19 +19,20 @@
         .metadata{
 
             span{
-                padding: 5px;
+                padding: 0px;
+                color: #000;
             }
 
             .metadata-user{
 
-                color: #5755d9;
+                color: $link-color;
                 outline: none;
                 text-decoration: none;
                 font-size: 1.1em;
 
                 &:hover {
-                    color: #f60;
-                    transition: color 500ms ease;
+                    color: $link-color;
+                    //transition: color 500ms ease;
                 }
 
             }
@@ -40,7 +42,10 @@
             }
 
             .metadata-comments{
-
+                color: $link-color;
+                outline: none;
+                text-decoration: none;
+                font-size: 1.1em;
             }
         }
     }

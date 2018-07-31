@@ -49,28 +49,15 @@ class User extends Component {
               {this.props.loading && <Spinner/>}
               {
                 !this.props.loading && this.props.user &&
-                <div className="user">
+                <div className="user-page">
                     <h2> { this.props.user.id }</h2>
                     <ul>
-                        {this.props.user.created && <li>Joined -  { moment(this.props.user.created * 1000).format("M/DD/YY, h:mm a")}</li> }
-                        {this.props.user.karma && <li>Karma <span className="badge" data-badge={this.props.user.karma || 0}></span></li> }
+                        {this.props.user.created && <li>Joined - <span className="value">{ moment(this.props.user.created * 1000).format("M/DD/YY, h:mm a")} </span></li> }
+                        {this.props.user.karma && <li>Karma - <span className="value">{this.props.user.karma || 0}</span></li> }
                     </ul>
 
                 </div> 
             }
-            <style jsx>{`
-    
-            .user {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                background: #f8f9fa;
-                min-height: 5em;
-                padding: 3em;
-            }
-            
-            `}</style>
             </Layout>  
         );
     }
